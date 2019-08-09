@@ -10,56 +10,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<title>아이디 중복체크</title>
+<title>닉네임 중복체크</title>
 
 <script type="text/javascript">
 	
 	onload=function(){
-		var id = opener.document.getElementsByName("member_id")[0].value;
-		document.getElementsByName("id")[0].value=id;
+		var nickname = opener.document.getElementsByName("member_nickname")[0].value;
+		document.getElementsByName("nickname")[0].value=nickname;
 		
 	}
 	
-	function idConfirm(bool){	
+	function nicknameConfirm(bool){	
 		if(bool="true"){
-			opener.document.getElementsByName("member_id")[0].title="y";
-			opener.document.getElementsByName("member_nickname")[0].focus();
+			opener.document.getElementsByName("member_nickname")[0].title="y";
+			opener.document.getElementsByName("member_id")[0].focus();
 		} else {
 			opener.document.getElementsByName("member_id")[0].focus();
 		}
 	
-		self.close();	
+		self.close();
 	}
 	
 
 </script>
 <style type="text/css">
-	
 .btn{
 	background-color: skyblue;
 	color: white;
 	}
 
-
 </style>
 
 </head>
 <%
-	String idnotused = request.getParameter("idnotused");
+	String nicknamenotused = request.getParameter("nicknamenotused");
 %>
 <body>
 
 	<table border="1">
 		<tr>
-			<td><input type="text" name="id"></td>
+			<td><input type="text" name="nickname"></td>
 		</tr>
 		<tr>
-			<td><%=idnotused.equals("true")?"id 생성 가능":"중복 된 아이디 존재" %> </td>
+			<td><%=nicknamenotused.equals("true")?"닉네임 생성 가능":"중복 된 닉네임 존재" %> </td>
 		</tr>
 		<tr>
 			<td>
-				<input type="button" value="확인" onclick="idConfirm('<%=idnotused%>')" class="btn btn--check10" />	
-			</td>		
+				<input type="button" value="확인" onclick="nicknameConfirm('<%=nicknamenotused%>')" class="btn btn--check9"/>	
+			</td>
+		</tr>
 	</table>
 
 <body>

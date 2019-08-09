@@ -1,10 +1,7 @@
-<%@page import="com.doncar.dto.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8");%>
 <% response.setContentType("text/html; charset=UTF-8"); %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,33 +10,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<title>관리자 페이지</title>
+<title>Insert title here</title>
 <style type="text/css">
-#adminmain{
-	padding-left: 500px;
+
+#carpoolmain{
+
+	padding-left: 430px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
 
 </style>
-
 </head>
-
 <body>
 <%@ include file="./include/header.jsp" %>
-<div id="adminmain">
+<div id="carpoolmain">
 	<h3>
-		<img src="image\admin.jfif" style="width:50px; height:50px;"/>	
-		관리자 페이지
+		<img src="image\car2.jpeg" style="width:50px; height:50px;"/>	
+		카풀 메인
 	</h3>
-	${MemberDto.member_nickname }님 환영합니다!<br/>
-	${MemberDto.member_nickname }님의 계정은 ${MemberDto.member_roll } 계정이시군요! <br/>
-	<input type="button" value="내정보" onclick="location.href='doncar.do?command=member_selectone&member_no=${MemberDto.member_no}'"/>
-	<input type="button" value="회원정보" onclick="location.href='doncar.do?command=member_selectlist'">
-	
-</div>
+	<a href="doncar.do?command=carboard_selectlist">CarBoard</a>
+	<a href="doncar.do?command=caracc_selectlist">CarAcc</a>
+</div>	
 <%@ include file="./include/footer.jsp" %>	
 </body>
 </html>
-
-
