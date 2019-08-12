@@ -24,21 +24,25 @@
 </head>
 <body>
 	<%@ include file="./include/header.jsp"%>
-	<h1>공지사항</h1>
+	<h3>
+		<img src="image\notice2.png" style="width:50px; height:80px;"/>	
+		공지사항 리스트
+	</h3>
 
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
 		<col width="50px" />
 		<col width="100px" />
 		<col width="300px" />
 		<col width="100px" />
-
+	<thead>
 		<tr>
 			<th>번 호</th>
 			<th>작성자</th>
 			<th>제 목</th>
 			<th>작성일</th>
 		</tr>
-
+	</thead>
+	<tbody>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr>
@@ -59,9 +63,9 @@
 		</c:choose>
 		<c:if test="${!empty MemberDto }">
 			<c:choose>
-				<c:when test="${MemberDto.member_roll }=='ADMIN'">
+				<c:when test="${MemberDto.member_roll eq 'ADMIN'}">
 					<tr>
-						<td colspan="4"><input type="button" value="글쓰기"
+						<td colspan="4"><input type="button" value="글쓰기" class="btn btn-default pull-right"
 							onclick="location.href='doncar.do?command=noticeboard_insert'">
 						</td>
 					</tr>
@@ -72,6 +76,7 @@
 			<td colspan="4"><span id="page"></span> <%@ include  file="./include/searchform.jsp"%></td>
 			
 		</tr>
+	</tbody>
 	</table>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <%@ include file="./include/footer.jsp" %>    

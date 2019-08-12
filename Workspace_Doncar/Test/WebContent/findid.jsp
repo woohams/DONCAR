@@ -38,7 +38,7 @@
 	<form action="doncar.do" method="post">
 		<input type="hidden" name="command" value="member_findid">
 	
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
 			<tr>
 				<td colspan="3" align="center" bgcolor="skyblue">
 					내 정보로 찾기

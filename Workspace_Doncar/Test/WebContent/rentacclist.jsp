@@ -19,8 +19,8 @@
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
-	<h1>RentAccList Page</h1>
-	<table border="1">
+	<h1>RentAccList Page</h1>	
+	<table border="1" class="table table-striped table-hover">
 		<col width="80">
 		<col width="80">
 		<col width="250">
@@ -29,6 +29,7 @@
 		<col width="200">
 		<col width="80">
 		
+		<thead>
 		<tr>
 			<th>승인번호</th>
 			<th>렌트게시판번호</th>
@@ -39,6 +40,8 @@
 			<th>남길 말</th>
 			<th>닉네임</th>
 		</tr>
+		</thead>
+		<tbody>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr>
@@ -64,10 +67,11 @@
 		</c:choose>
 		<tr>
 			<td colspan="1">
-				<input type="button" value="글쓰기" onclick="location.href='doncar.do?command=rentacc_insert'">
+				<input type="button" class="btn btn-default pull-right" value="글쓰기" onclick="location.href='doncar.do?command=rentacc_insert'">
 				<span id="page"></span>
 			</td>
 		</tr>
+		</tbody>
 	</table>
 <%@ include file="./include/footer.jsp" %>	
 </body>

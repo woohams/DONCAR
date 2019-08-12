@@ -16,9 +16,14 @@
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
+	<h3>
+		<img src="image\notice1.png" style="width:50px; height:50px;"/>	
+		공지사항 글쓰기
+	</h3>
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="noticeboard_insertres">
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="notice_writer" value="${MemberDto.member_nickname }"/></td>
@@ -31,12 +36,15 @@
 				<th>내   용</th>
 				<td><textarea id="summernote" name="notice_content" ></textarea></td>
 			</tr>
+		</thead>
+		<tbody>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="완료"/>
-					<input type="button" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
+					<input class="btn btn-default pull-right" type="submit" value="완료"/>
+					<input class="btn btn-default pull-right" type="button" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
 				</td>
 			</tr>
+		</tbody>
 		</table>
 	</form>
 <%@ include file="./include/footer.jsp" %>	

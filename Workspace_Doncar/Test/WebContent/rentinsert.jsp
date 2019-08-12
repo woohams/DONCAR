@@ -19,11 +19,13 @@
 <title>RENT INSERT</title>
 
 <style type="text/css">
+
 #rentinsert {
 	padding-left: 50px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
+
 </style>
 </head>
 <script type="text/javascript">
@@ -35,15 +37,16 @@ function popUp(){
 
 
 $(function(){
-	$("#rent_price").change(function(){
-		var rent_price = $("#rent_price").val();
-	$("#rent_price_value").html(rent_price);
+	$("#price").change(function(){
+		var price = $("#price").val();
+	$("#price_value").html(price);
 		
 	})
 });	
 </script>
 <script type="text/javascript" src="./js/mapselect.js"></script>
 <body>
+<input id="token" type="hidden" value="22ebf050-1aab-41b6-84f8-40aede94e55d">
 	<%@ include file="./include/header.jsp"%>
 	<div id="rentinsert">
 		<h3>
@@ -54,105 +57,120 @@ $(function(){
 
 		<form action="doncar.do" method="post">
 			<input type="hidden" name="command" value="rentinsertres">
-			<table border="1">
-				<tr>
-					<th>진행도</th>
-					<td><input type="text" name="rent_process" value="대기"
-						readonly="readonly"></td>
-				</tr>
-				<tr>
-					<th>제목</th>
-					<td><input type="text" name="rent_title"></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type="text" name="rent_writer"
-						value="${MemberDto.member_nickname }" readonly="readonly"></td>
-				</tr>
-				<tr>
-					<th>제조사</th>
-					<td id="rent_company">
-						<input type="radio" name="rent_company" value="KIA">KIA 
-						<input type="radio" name="rent_company" value="SSANGYONG">SSANGYONG 
-						<input type="radio" name="rent_company" value="CHEVORLET">CHEVORLET 
-						<input type="radio" name="rent_company" value="HYUNDAI">HYUNDAI 
-						<input type="radio" name="rent_company" value="SAMSUNG">SAMSUNG
-					</td>
-				</tr>
+				<table border="1" class="table table-striped table-hover">
+					<thead>
+					<tr>
+						<th>진행도</th>
+						<td><input type="text" name="rent_process" value="대기" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<th>제목</th>
+						<td><input type="text" name="rent_title"></td>
+					</tr>
+					<tr>
+						<th>작성자</th>
+						<td><input type="text" name="rent_writer" value="${MemberDto.member_nickname }" readonly="readonly"></td>
+					</tr>
+					<tr>
+						<th>제조사</th>
+						<td id="company">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="radio" class="form-check-input" name="rent_company" value="KIA">KIA
+									<input type="radio" class="form-check-input" name="rent_company" value="SSANGYONG" style="margin-left:10px;">SSANGYONG
+									<input type="radio" class="form-check-input" name="rent_company" value="CHEVORLET" style="margin-left:10px;">CHEVORLET
+									<input type="radio" class="form-check-input" name="rent_company" value="HYUNDAI" style="margin-left:10px;">HYUNDAI
+									<input type="radio" class="form-check-input" name="rent_company" value="SAMSUNG" style="margin-left:10px;">SAMSUNG
+								</label>
+							</div>
+						</td>
+					</tr>
 
-				<tr>
-					<th>크 기</th>
-					<td id="rent_size">
-					 	<input type="radio" name="rent_size"  value="경차">경차 
-						<input type="radio" name="rent_size"  value="소형">소형
-						 <input type="radio" name="rent_size" value="준중형">준중형
-						 <input type="radio" name="rent_size" value="중형">중형 
-						<input type="radio" name="rent_size"  value="준대형">준대형 
-						<input type="radio" name="rent_size"  value="대형">대형 
-						<input type="radio" name="rent_size"  value="SUV">SUV
-					</td>
-				</tr>
+					<tr>
+						<th>크 기</th>
+						<td id="size">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="radio" class="form-check-input" name="rent_size"  value="경차">경차 
+									<input type="radio" class="form-check-input" name="rent_size"  value="소형" style="margin-left:10px;">소형
+									<input type="radio" class="form-check-input" name="rent_size"  value="준중형" style="margin-left:10px;">준중형
+									<input type="radio" class="form-check-input" name="rent_size"  value="중형" style="margin-left:10px;">중형 
+									<input type="radio" class="form-check-input" name="rent_size"  value="준대형" style="margin-left:10px;">준대형 
+									<input type="radio" class="form-check-input" name="rent_size"  value="대형" style="margin-left:10px;">대형 
+									<input type="radio" class="form-check-input" name="rent_size"  value="SUV" style="margin-left:10px;">SUV
+								</label>
+							</div>
+						</td>
+					</tr>
 
-				<tr>
-					<th>연 료</th>
-					<td id="rent_fuel">
-						<input type="radio" name="rent_fuel"  value="경유">경유
-						 <input type="radio" name="rent_fuel" value="휘발유">휘발유
-						 <input type="radio" name="rent_fuel" value="하이브리드">하이브리드
-					</td>
-				</tr>
+					<tr>
+						<th>연 료</th>
+						<td id="fuel">
+							<div class="form-check">
+								<label class="form-check-label">
+									<input type="radio" class="form-check-input" name="rent_fuel"  value="경유">경유
+						 			<input type="radio" class="form-check-input" name="rent_fuel"  value="휘발유" style="margin-left:10px;">휘발유
+						 			<input type="radio" class="form-check-input" name="rent_fuel"  value="하이브리드" style="margin-left:10px;">하이브리드
+						 		</label>
+						 	</div>
+						</td>
+					</tr>
 
-				<tr>
-					<th>가 격</th>
-					<td>
-						<input type="range" id="rent_price" name="rent_price" min="0" step="10000" max="50000">
-						<span id="rent_price_value">0</span>원</td>
-				</tr>
-				<tr>
-					<th>지역</th>
-					<td>
-					<input id="location" type="text" name="rent_location" value=""> 
-						<select id="cd_list">
-							<option value="">시</option>
-						</select> 
-						<select id="addr_list">
-							<option>군/구</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<th>차량이미지</th>
-					<td><input type="text" name="rent_img" value="">
-						<button id="imageUpload">대표이미지 업로드(미구현)</button></td>
-				</tr>
-				<tr>
-					<th>차량이름</th>
-					<td><input type="text" name="rent_carname" value=""></td>
-				</tr>
-				<tr>
-					<td>차번호</td>
-					<td><input type="text" name="rent_carno"></td>
-				</tr>
-				<tr>
-					<td>임시!x , y 좌표 받기 ! button만 살리고 inputtag는 hidden으로!</td>
-					<td>
-						<button type="button" onclick="popUp();">좌표설정!</button> 
-						<input type="text" id="x" name="rent_x_point">
-						<input type="text" id="y" name="rent_y_point">
-					</td>
-				</tr>
-				<tr>
-					<th>내용</th>
-					<td>
-						<textarea id="summernote" name="rent_content"></textarea>
-					</td>
-				</tr>
-
-				<tr>
-					<td colspan="2"><input type="submit" value="확인"> 
-					<input type="button" value="취소" 	onclick="location.href='doncar.do?command=rentboard_selectlist'">
-					</td>
-				</tr>
+					<tr>
+						<th style="vertical-align: middle;">가 격</th>
+						<td>
+							<input type="range" id="price" name="rent_price" min="0" step="10000" max="50000" value="0">
+							<span id="price_value">0</span>원</td>
+					</tr>
+					<tr>
+						<th>지역</th>
+						<td>
+							<input id="token" type="hidden" value="952acd00-3791-4a45-a931-6a1cd34935e5">					
+							<input id="location" type="text" name="rent_location" value=""> 
+							<select id="cd_list">
+								<option value="">시</option>
+							</select> 
+							<select id="addr_list">
+								<option>군/구</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<th>차량이미지</th>
+						<td><input type="text" name="rent_img" value="">
+							<button id="imageUpload" class="btn btn-default">대표이미지 업로드(미구현)</button></td>
+					</tr>
+					<tr>
+						<th>차량이름</th>
+						<td><input type="text" name="rent_carname" value=""></td>
+					</tr>
+					<tr>
+						<th>차번호</th>
+						<td><input type="text" name="rent_carno"></td>
+					</tr>
+					<tr>
+						<td>임시!x , y 좌표 받기 ! button만 살리고 inputtag는 hidden으로!</td>
+						<td>
+							<button type="button" class="btn btn-default" onclick="popUp();">좌표설정!</button> 
+							<input type="text" id="x" name="rent_x_point">
+							<input type="text" id="y" name="rent_y_point">
+						</td>
+					</tr>
+					<tr>
+						<th style="vertical-align: middle;">내용</th>
+						<td>
+							<textarea id="summernote" name="rent_content"></textarea>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<input type="button" class="btn btn-default pull-right"	 value="취소" onclick="location.href='doncar.do?command=rentboard_selectlist'" />
+							<input type="submit" class="btn btn-default pull-right"	 value="확인" /> 
+						</td>
+					</tr>
+				</tbody>
 			</table>
 		</form>
 	</div>

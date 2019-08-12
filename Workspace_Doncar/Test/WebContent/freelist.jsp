@@ -23,21 +23,25 @@
 
 
 
-	<h1>자유게시판</h1>
+	<h3>
+		<img src="image\free1.jpg" style="width:50px; height:50px;"/>	
+		자유게시판
+	</h3>
 	
-	<table  border="1">
+	<table border="1" class="table table-striped table-hover">
 		<col width="50px"/>	
 		<col width="100px"/>
 		<col width="300px"/>
 		<col width="100px"/>
-		
+		<thead>
 		<tr>
 			<th>번   호</th>
 			<th>작성자</th>
 			<th>제   목</th>
 			<th>작성일</th>
 		</tr>
-		
+		</thead>
+		<tbody>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr>
@@ -57,10 +61,11 @@
 		</c:choose>	
 		<tr>
 			<td colspan="4">
-				<input type="button" value="글쓰기" onclick="location.href='doncar.do?command=freeboard_insert'"/><span id="page"></span>
+				<input type="button"  class="btn btn-default pull-right" value="글쓰기" onclick="location.href='doncar.do?command=freeboard_insert'"/><span id="page"></span>
 				<%@ include file="./include/searchform.jsp" %>
 			</td>
 		</tr>
+		</tbody>
 	</table>
 <%@ include file="./include/footer.jsp" %>
 </body>

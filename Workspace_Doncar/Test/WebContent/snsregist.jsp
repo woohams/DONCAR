@@ -11,75 +11,117 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SNS 회원가입</title>
 <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
-		
-	function nicknameChk(){
-		var doc = document.getElementsByName("member_nickname")[0];
-		if(doc.value.trim() == "" || doc.value == null){
-			alert("닉네임을 입력 해주세요!!");
+
+
+
+function nickChk(){
+	var id = $("#nick").val();
+	var chk = $("#nick_check");
+	if(id==null || id==""){
+		chk.prop('title','n');
+		chk.html('부적합한 닉네임입니다');
+		chk.css('color','red');
+		return;
+	}else{
+		var command = 'command=member_nicknamechk'
+		id = "&nick="+id;
+		$.ajax({
+			url : "doncar.do",
+			data : command+id,
+			dataType : "json",
+			success : function(obj){
+				if(obj.res == true){
+					chk.prop('title','y');
+					chk.html('중복체크완료');
+					chk.css('color','black');
+				}else{
+					chk.prop('title','n');
+					chk.html('부적합한 닉네임입니다');
+					chk.css('color','red');
+				}
+			},error : function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	}
+}
+
+function check(){
+		var chk = $('* [title=n]').size();
+		if(chk==0){
+			return true;
 		}else{
-			open("doncar.do?command=member_nicknamechk&nickname"+doc.value,"","width=200 height=200");
+			alert('유효성검사에 실패했습니다 다시확인해주세요');
+			return false;
 		}
-	}
-		
 
-	function nicknameChkConfirm() {
-		var chk = document.getElementsByName("member_nickname")[0].title;
-		if (chk == "n") {
-			alert("닉네임 중복 체크를 해주세요.");
-			document.getElementsByName("member_nickname")[0].focus();
-		}
-	}
+}
 
-	$(function() {
-
-		alert("회원 가입 하세요");
-
-		$("#kakaoSubmit").click(function() {
-			$("#kakaoForm").submit();
-		});
-	});
+$(function(){
+	nickChk();
+})
 </script>
+
+<style type="text/css">
+#snslogin{
+	padding-left: 200px;
+	width: 600px;
+}
+h3 > img{
+	height: 100px;
+	width: 100px;
+	text-align: center;
+}
+
+
+</style>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
+<div id="snslogin">
+	<h3>
+		<img src="image\regist.jfif"/>	
+		회 원 가 입
+	</h3>
 
-	<h1>회 원 가 입</h1>
-
-	<form action="doncar.do" method="post" id="kakaoForm">
+	<form action="doncar.do" method="post" id="kakaoForm" onsubmit="return check()">
 		<input type="hidden" name="command" value="member_regist" />
-		<input type="hidden" name="member_id" id="member_id" title="n" value="${member_id }"/>
+		<input type="hidden" name="member_id" id="member_id" value="${member_id }"/>
 		<input type="hidden" name="member_pw" id="member_pw" value="${member_id }" />
 
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>닉네임</th>
 				<td>
-					<input type="text" name="member_nickname" required="required" title="n" value="${member_nickname }"/> 
-					<input type="button" value="중복 체크" onclick="nicknameChk();nicknameChkConfirm();" />
+					<input type="text" name="member_nickname" id="nick" onchange="nickChk();" required="required" value="${member_nickname }"/>
+					<span id="nick_check" title="n" style="color:red; font-size: 3px;"></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>이름</th>
 				<td>
-					<input type="text" name="member_name" required="required" onclick="" />
+					<input type="text" name="member_name" required="required"/>
 				</td>
 			</tr>
+		</thead>
+		<tbody>
 			<tr>
 				<td colspan="2">
-					<input type="button" id="kakaoSubmit" value="가입"/> 
-					<input type="button" value="취소" onclick="location.href='index.jsp'" /> 
+					<input type="submit" class="btn btn-default" value="가입" style="background-color:black; color:white;"/> 
+					<input type="button" class="btn btn-default" value="취소" onclick="location.href='index.jsp'" /> 
 				</td>
 			</tr>
-
+		</tbody>
 		</table>
 
 	</form>
-
+</div>
 
 
 

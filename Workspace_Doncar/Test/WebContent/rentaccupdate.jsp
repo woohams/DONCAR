@@ -24,7 +24,8 @@
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="rentaccupdateres">
 	<input type="hidden" name="rentacc_no" value="${dto.rentacc_no}">
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>승인번호</th>
 			<td>${dto.rentacc_no}</td>
@@ -57,12 +58,15 @@
 			<th>남기는말</th>
 			<td><textarea rows="10" cols="60" name="rentacc_comment">${dto.rentacc_comment}</textarea></td>
 		</tr>
+		</thead>
+		<tbody>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="수정">
-				<input type="button" value="취소" onclick="location.href='doncar.do?command=rentacc_selectone&rentacc_no=${dto.rentacc_no}'">
+				<input type="submit" class="btn btn-default pull-right" value="수정">
+				<input type="button" class="btn btn-default pull-right" value="취소" onclick="location.href='doncar.do?command=rentacc_selectone&rentacc_no=${dto.rentacc_no}'">
 			</td>
 		</tr>
+		</tbody>
 	</table>
 	</form>
 <%@ include file="./include/footer.jsp" %>	

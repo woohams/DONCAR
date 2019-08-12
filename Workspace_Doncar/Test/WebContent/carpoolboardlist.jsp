@@ -31,9 +31,9 @@
 	}
 </style>
 <script type="text/javascript">
-		function popUp(){
-			
-			window.open("./calendar/calendar.jsp","","left=600px,top=600px,width=600px,height=300px");
+		function popUp(self){
+			var id = $(self).prop('id');
+			window.open("./calendar/calendar.jsp?id="+id,"","left=600px,top=600px,width=600px,height=300px");
 		}
 </script>
 </head>
@@ -42,26 +42,30 @@
 
 	<fieldset>
 	<legend>검색설정칸입니다.</legend>
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
+		<thead>
 		<tr>
 			<th>시작일</th>
 			<th>종료일</th>
 		</tr>
+		</thead>
+		<tbody>
 		<tr>
-			<td><input type="text" id="startdate" readonly="readonly" onclick="popUp();"></td>
-			<td><input type="text" id="enddate" readonly="readonly" onclick="popUp();"></td>
+			<td><input type="text" id="startdate" readonly="readonly"  placeholder="시작일" onclick="popUp(this);"></td>
+			<td><input type="text" id="enddate" readonly="readonly" placeholder="종료일" onclick="popUp(this);"></td>
 		</tr>
+		</tbody>
 	</table>
 	</fieldset>
 	
-	<table>
+	<table border="1" class="table table-striped table-hover">
 		<col width="80">
 		<col width="200">
 		<col width="100">
 		<col width="100">
 		<col width="100">
 		<col width="100">
-		
+	<thead>	
 		<tr>
 			<th>글 번호</th>
 			<th>제목</th>
@@ -70,7 +74,8 @@
 			<th>지역</th>
 			<th>작성 시간</th>
 		</tr>
-		
+	</thead>
+	<tbody>
 		<c:choose>
 			<c:when test="${empty list }">
 				<tr>
@@ -95,14 +100,14 @@
 		
 		<tr>
 			<td colspan="6">
-				<input type="button" value="글 작성" onclick="location.href='doncar.do?command=carboard_regist'">
+				<input type="button" class="btn btn-default pull-right" value="글 작성" onclick="location.href='doncar.do?command=carboard_regist'">
 				<span id="page"></span>
 				<%@ include file="./include/searchform.jsp" %> 
 			</td>
 		</tr>
-		
+	</tbody>	
 	</table>
-</div>
+
 <%@ include file="./include/footer.jsp" %>	
 </body>
 </html>

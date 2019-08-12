@@ -93,75 +93,14 @@ h1 > img{
                 </form>
             </div>
         	</div>
-                <a id="kakao-login-btn"></a>
-                <input type="button" value="카카오로그인" onclick="klogin();">	
-				<a href="https://developers.kakao.com/logout"><img src="image\kakao_account_logout_btn_medium_narrow.png" id="kakao-logout-btn" alt="카카오 로그아웃"/></a> 
-   		</div>
+                <a id="kakao-login-btn">
+               		<img src="image/kakao_account_login_btn_medium_narrow.png" onclick="klogin();"/>
+                </a>
+  		</div>
    	</div>
 	
 </div>
     <script type='text/javascript'>
-
-/*         Kakao.init('2b731013681fcc6d66dd529c2df1358b');
-        Kakao.Auth.createLoginButton({
-          container: '#kakao-login-btn',
-          success: function(authObj) {
-            Kakao.API.request({
-                url: '/v2/user/me',
-                success: function(res) {
- */
- 
- /* 	                alert(JSON.stringify(res));		// kakao.api.request 에서 불러온 결과값 json형태로 출력
-             	    alert(JSON.stringify(authObj)); 	// Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-					alert(res.properties.nickname+'님 환영합니다.');
-             	    
-					kakao.api.request;
-					location.href="http://localhost:8787/Doncar/main.jsp"
- */					
- 
-/*  					var kakaoId = res.id;
-					var kakaoEmail = res.kakao_account.email;
-					var kakaoNickname = res.properties.nickname;
-					
-					location.href="doncar.do?command=member_kakao_login&member_id="+kakaoId+"&member_email="+kakaoEmail+"&member_nickname="+kakaoNickname;
- */ 					
-/* 					alert(JSON.stringify(res.properties.email));
-		            alert(JSON.stringify(res.id));
-		            alert(JSON.stringify(res.properties.nickname));
- */    
- 
- 
- 
-/* 					 createKakaotalkLogout();
-					
-                },
-                fail: function(error) {
-                  alert(JSON.stringify(error));
-                }
-              });
-          },
-          fail: function(err) {
-             alert(JSON.stringify(err));
-          }
-        });
-        
-	function kakaoLogout(){
-		Kakao.Auth.logout(function (){
-			alert("성공적으로 로그아웃하였습니다.");
-			setTimeout(function(){
-				location.href="http://localhost:8080/Doncar/login.jsp"
-				alert("장기간 입력이 없어서 자동으로 로그아웃하였습니다.");
-			}, 1000*60*10);
-		});
-	}
- */ 
-	
-	
-		
-	
-        
-//        Kakao.Auth.setAccessToken(accessTokenFromServer);
-//        alert(accessTokenFromServer);
 
 	function klogin(){
 		
@@ -177,7 +116,6 @@ h1 > img{
 					var kakaoEmail = res.kakao_account.email;
 					var kakaoNickname = res.properties.nickname;
 					
-					alert(kakaoId);
 					location.href="doncar.do?command=member_kakao_login&member_id="+kakaoId+"&member_email="+kakaoEmail+"&member_nickname="+kakaoNickname;
 					 createKakaotalkLogout();
 						
@@ -191,9 +129,18 @@ h1 > img{
              alert(JSON.stringify(err));
           }
         });
-                }
-	
-	
+        }
+/*
+	function kakaoLogout(){
+		Kakao.Auth.logout(function (){
+			alert("성공적으로 로그아웃하였습니다.");
+			setTimeout(function(){
+				location.href="http://localhost:8080/Doncar/login.jsp"
+				alert("장기간 입력이 없어서 자동으로 로그아웃하였습니다.");
+			}, 1000*60*10);
+		});
+	}
+ */ 
 
     </script>
 

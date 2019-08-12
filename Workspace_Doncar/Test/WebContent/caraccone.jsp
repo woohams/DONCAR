@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,24 +23,23 @@
 	}
 </style>
 </head>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0a0d22b781ecb062840d3c4133c7220"></script>
+<script type="text/javascript" src="./js/setMap.js"></script>
 <body>
+
 <%@ include file="./include/header.jsp" %>
+	<input type="hidden" id="x" value="${dto.caracc_xpoint }">
+	<input type="hidden" id="y" value="${dto.caracc_ypoint }">
 	<table>
 		<tr>
 			<th>진행도</th>
 			<td>${dto.caracc_process }</td>
 		</tr>
 		<tr>
-			<th>위도</th>
-			<td>${dto.caracc_xpoint }</td>
-		</tr>
-		<tr>
-			<th>경도</th>
-			<td>${dto.caracc_ypoint }</td>
-		</tr>
-		<tr>
-			<th>acc</th>
-			<td>${dto.caracc_acc }</td>
+			<th>하차지역</th>
+			<td>
+				<div id="map" style="width:350px; height:350px;"></div>
+			</td>
 		</tr>
 		<tr>
 			<th>닉네임</th>
@@ -50,7 +50,7 @@
 			<td><textarea rows="10" cols="60">${dto.caracc_coment }</textarea></td>
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
 				<input type="button" value="답글" onclick="">
 				<input type="button" value="수정" onclick="location.href='doncar.do?command=caracc_update&caracc_no=${dto.caracc_no }'">
 				<input type="button" value="삭제" onclick="location.href='doncar.do?command=caracc_delete&caracc_no=${dto.caracc_no }'">

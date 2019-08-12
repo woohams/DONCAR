@@ -19,7 +19,8 @@
 
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="freeboard_insertres"/>
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>작성자</th>
 				<td><input type="text" name="free_writer" readonly="readonly" value="${MemberDto.member_nickname }"/></td>
@@ -32,16 +33,18 @@
 				<th>내   용</th>
 				<td><textarea id="summernote" name="free_content"></textarea></td>
 			</tr>
+		</thead>
+		<tbody>
 			<tr>
-				<td>
-					<input type="submit" value="완료"/>
-					<input type="button" value="목록" onclick="location.href='doncar.do?command=freeboard_selectlist'"/>
+				<td colspan="3">
+					<input type="submit" class="btn btn-default pull-right" value="완료"/>
+					<input type="button" class="btn btn-default pull-right" value="목록" onclick="location.href='doncar.do?command=freeboard_selectlist'"/>
 				</td>
 			</tr>
+		</tbody>
 		</table>
 	</form>
 <%@ include file="./include/footer.jsp" %>	
 <%@ include file="./js/summernote.html" %>
-
 </body>
 </html>

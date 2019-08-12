@@ -15,7 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>카풀 자세히보기</title>
 <style type="text/css">
 	
 	table,td,th{
@@ -24,20 +24,25 @@
 	}
 	#carpoolone{
 	
-		padding-left: 430px;
+		padding-left: 10	0px;
 		padding-top: 25px;
 		padding-bottom: 50px;
 	}
 </style>
 </head>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0a0d22b781ecb062840d3c4133c7220"></script>
+<script type="text/javascript" src="./js/setMap.js"></script>
 <body>
 <%@ include file="./include/header.jsp" %>
 <div id="carpoolone">
+<input type="hidden" id="x" value="${dto.car_board_x_point }">
+<input type="hidden" id="y" value="${dto.car_board_y_point }">
 	<h3>
 		<img src="image\car6.jpeg" style="width:50px; height:50px;"/>	
 		카풀게시글 상세보기
 	</h3>
-	<table>
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>제목</th>
 			<td>${dto.car_board_title }</td>
@@ -59,13 +64,32 @@
 			<td>${dto.car_board_content }</td>
 		</tr>
 		<tr>
+			<th>출발지</th>
 			<td>
-				<input type="button" value="답글" onclick="">
-				<input type="button" value="수정" onclick="location.href='doncar.do?command=carboard_update&car_board_no=${dto.car_board_no }'">
-				<input type="button" value="삭제" onclick="location.href='doncar.do?command=carboard_delete&car_board_no=${dto.car_board_no }'">
-				<input type="button" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'">
+				<div id="map" style="width:350px; height:350px;" ></div>
 			</td>
 		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td colspan="2">
+			<c:choose>
+				<c:when test="${empty MemberDto }">
+				</c:when>
+				<c:otherwise>
+					<c:if test="${MemberDto.member_nickname eq dto.car_board_writer }">
+						<input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='doncar.do?command=carboard_update&car_board_no=${dto.car_board_no }'">
+						<input type="button" class="btn btn-default pull-right" value="삭제" onclick="location.href='doncar.do?command=carboard_delete&car_board_no=${dto.car_board_no }'">
+					</c:if>
+					<c:if test="${MemberDto.member_nickname ne dto.car_board_writer }">
+						<input type="button" class="btn btn-default pull-right" value="신청" onclick="location.href='caraccinsert.jsp?seq=${dto.car_board_no }'">
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+				<input type="button" class="btn btn-default pull-right" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'">
+			</td>
+		</tr>
+		</tbody>
 		
 	</table>
 	<%@ include file="./include/comment.jsp" %>

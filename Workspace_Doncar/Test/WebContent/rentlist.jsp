@@ -15,23 +15,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-
-
-	
-	$(function(){
-		
-		$("#rent_price").change(function(){
-			var rent_price = $("#rent_price").val();
-			$("#rent_price_value").html(rent_price);
-		});
-		
-	});
-	
-	
-
-</script>
-
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,39 +28,144 @@
 			var id = $(self).prop('id');
 			window.open("./calendar/calendar.jsp?id="+id,"","left=600px,top=600px,width=600px,height=300px");
 		}
+		
+		$(function(){
+			
+			$("#rent_price").change(function(){
+				var rent_price = $("#rent_price").val();
+				$("#rent_price_value").html(rent_price);
+			});
+			
+		});
+
 </script>
 
 <style type="text/css">
 #rentinsert{
+
 	padding-left: 50px;
 	padding-top: 25px;
 	padding-bottom: 50px;
+}
+#page{
+
+	background:skyblue; 
+	text-align:center
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 23px;
+  height: 24px;
+  border: 0;
+  background: url('contrasticon.png');
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 23px;
+  height: 25px;
+  border: 0;
+  background: url('contrasticon.png');
+  cursor: pointer;
 }
 
 </style>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
+<form action="doncar.do" method="get">
+	<input type="hidden" name="command" value="rentboard_selectlist">
+	<table border="1" class="table table-striped table-hover">
+		<col width="200px">
+		<col width="600px">
+		<col width="400px">
+		<col width="400px">
+		<thead>
+		<tr>
+			<th>제조사</th>
+			<td id="rent_company">
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="rent_company" value="">전체
+						<input type="radio" class="form-check-input" name="rent_company" value="KIA" style="margin-left:10px;">KIA
+						<input type="radio" class="form-check-input" name="rent_company" value="SSANGYONG" style="margin-left:10px;">SSANGYONG
+						<input type="radio" class="form-check-input" name="rent_company" value="CHEVORLET" style="margin-left:10px;">CHEVORLET
+						<input type="radio" class="form-check-input" name="rent_company" value="HYUNDAI" style="margin-left:10px;">HYUNDAI
+						<input type="radio" class="form-check-input" name="rent_company" value="SAMSUNG" style="margin-left:10px;">SAMSUNG
+					</label>
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>크 기</th>
+			<td id="rent_size">
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="rent_size" value="">전체
+						<input type="radio" class="form-check-input" name="rent_size" value="경차" style="margin-left:10px;">경차
+						<input type="radio" class="form-check-input" name="rent_size" value="소형" style="margin-left:10px;">소형
+						<input type="radio" class="form-check-input" name="rent_size" value="준중형" style="margin-left:10px;">준중형
+						<input type="radio" class="form-check-input" name="rent_size" value="중형" style="margin-left:10px;">중형
+						<input type="radio" class="form-check-input" name="rent_size" value="준대형" style="margin-left:10px;">준대형
+						<input type="radio" class="form-check-input" name="rent_size" value="대형" style="margin-left:10px;">대형
+						<input type="radio" class="form-check-input" name="rent_size" value="SUV" style="margin-left:10px;">SUV
+					</label>
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>연 료</th>
+			<td id="rent_fuel">
+				<div class="form-check">
+					<label class="form-check-label">
+						<input type="radio" class="form-check-input" name="rent_fuel" value="">전체
+						<input type="radio" class="form-check-input" name="rent_fuel" value="경유" style="margin-left:10px;">경유
+						<input type="radio" class="form-check-input" name="rent_fuel" value="휘발유" style="margin-left:10px;">휘발유
+						<input type="radio" class="form-check-input" name="rent_fuel" value="하이브리드" style="margin-left:10px;">하이브리드
+					</label>
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>가 격</th>
+			<td>
+				<div class="slidecontainer">
+					<input type="range" class="slider" id="rent_price" name="rent_price" min="0" step="10000" max="50000" value="0">
+					<span id="rent_price_value">0</span>원
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>날짜</th>
+			<td>
+				<input type="text" id="startdate" placeholder="시작일" readonly="readonly" onclick="popUp(this);">
+				<input type="text" id="enddate" placeholder="종료일" readonly="readonly" onclick="popUp(this);">
+			</td>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td colspan="2">
+				<input type="submit" class="btn btn-default" value="검색">
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	</form>
 
+	<hr/>
+	
 <div id="rentinsert">
 	<h3>
 		<img src="image\car4.jpeg" style="width:50px; height:50px;"/>	
 		렌트차량 목록
 	</h3>
-	<fieldset>
-		<legend>검색설정칸입니다.</legend>
-		<table border="1">
-			<tr>
-				<th>시작일</th>
-				<th>종료일</th>	
-			</tr>
-		<tr>
-			<td><input type="text" id="startdate" readonly="readonly" onclick="popUp(this);"></td>
-			<td><input type="text" id="enddate" readonly="readonly" onclick="popUp(this);"></td>
-		</tr>
-	</table>
-	</fieldset>
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 	<tr>
 		<th>번호</th>
 		<th>진행도</th>
@@ -93,7 +181,8 @@
 		<th>차량이름</th>
 		<th>내용이미지</th>
 	</tr>
-	
+	</thead>
+	<tbody>
 	<c:choose>
 	<c:when test="${empty list }">
 		<tr>
@@ -124,22 +213,14 @@
 	</c:choose>
 	<tr>
 		<td colspan="13">
-			<input type="button" value="글쓰기" onclick="location.href='doncar.do?command=rentboard_insert'">
+			<input type="button" class="btn btn-default pull-right" value="글쓰기" onclick="location.href='doncar.do?command=rentboard_insert'">
 			<span id="page"></span>
 			<%@ include file="./include/searchform.jsp" %> 
-			
 		</td>
 	</tr>
-	<tr>
-		<th>검색</th>
-		<td colspan="12">
-			<input type="text" size="50%" >
-			<button onclick="location.href='doncar.do?command=rentboard_search'">검색</button>
-		</td>
-	</tr>
-	
+	</tbody>
 	</table>
-</div>	
+</div>		
 <%@ include file="./include/footer.jsp" %>	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     

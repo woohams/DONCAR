@@ -13,17 +13,19 @@
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <title>공지사항 업데이트</title>
+
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
+	<h3>
+		<img src="image\notice4.png" style="width:50px; height:60px;"/>	
+		공지사항 업데이트
+	</h3>
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="noticeboard_updateres"/>	
-		<table>
-			<tr>
-				<td>
-					<input type="hidden" name="notice_no" value="${dto.notice_no }"/>
-				</td>
-			</tr>
+	<input type="hidden" name="notice_no" value="${dto.notice_no }"/>
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>작성자</th>
 				<td>${dto.notice_writer }</td>
@@ -33,15 +35,18 @@
 				<td><input type="text" name="notice_title" value="${dto.notice_title }"/></td>
 			</tr>
 			<tr>
-				<th>내   용</th>
+				<th style="vertical-align:center;">내   용</th>
 				<td><textarea id="summernote" name="notice_content">${dto.notice_content }</textarea></td>
 			</tr>
+		</thead>
+		<tbody>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="수정하기"/>
-					<input type="button" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
+					<input type="submit" class="btn btn-default pull-right" value="수정하기"/>
+					<input type="button" class="btn btn-default pull-right" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
 				</td>
 			</tr>
+		</tbody>
 		</table>
 	</form>
 <%@ include file="./include/footer.jsp" %>	

@@ -13,23 +13,26 @@
 <title>RENT UPDATE</title>
 <style type="text/css">
 #rentupdate{
-	padding-left: 500px;
+	padding-left: 100px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
-
 </style>
 </head>
 <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-
 function popUp(){
 	
 	window.open("./map.jsp","","left=300px,top=300px,width=1000px,height=500px");
 }
-
-
 $(function(){
+	var rent_company = '${dto.rent_company}';
+	$("#rent_company input [value="+rent_company+"]").attr("checked",true);
+	var rent_size = '${dto.rent_size}';
+	$("#rent_size input [value="+rent_size+"]").attr("checked",true);
+	var rent_fuel = '${dto.rent_fuel}';
+	$("#rent_fuel input [value="+rent_fuel+"]").attr("checked",true);
+	
 	$("#rent_price").change(function(){
 		var rent_price = $("#rent_price").val();
 	$("#rent_price_value").html(rent_price);
@@ -50,7 +53,8 @@ $(function(){
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="rentupdateres">
 	<input type="hidden" name="rent_board_no" value="${dto.rent_board_no}">
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>날짜</th>
 			<td>${dto.rent_regdate }</td>
@@ -113,6 +117,7 @@ $(function(){
 				<tr>
 					<th>지역</th>
 					<td>
+					<input id="token" type="hidden" value="4ba0eebb-edbf-4145-81e4-eeff65381bd9">
 					<input id="location" type="text" name="rent_location" value="${dto.rent_location }"> 
 						<select id="cd_list">
 							<option value="">시</option>
@@ -142,13 +147,15 @@ $(function(){
 		<td>내용</td>
 			<td><textarea id="summernote" name="rent_content">${dto.rent_content }</textarea></td>
 		</tr>
-		
+	</thead>
+	<tbody>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="확인">
-				<input type="button" value="취소" onclick="location.href='doncar.do?command=rentboard_selectone&rent_board_no=${dto.rent_board_no}'">
+				<input type="submit" class="btn btn-default pull-right" value="확인">
+				<input type="button" class="btn btn-default pull-right" value="취소" onclick="location.href='doncar.do?command=rentboard_selectone&rent_board_no=${dto.rent_board_no}'">
 			</td>
 		</tr>
+	</tbody>
 	</table>
 	</form>	
 </div>
@@ -157,4 +164,3 @@ $(function(){
 <%@ include file="./js/summernote.html" %>
 </body>
 </html>
-

@@ -19,9 +19,14 @@
 <style type="text/css">
 
 #adminmemberlist{
-	padding-left: 150px;
+	padding-left: 80px;
 	padding-top: 25px;
 	padding-bottom: 50px;
+}
+#titletr{
+	background: skyblue;
+	font: bold;
+	
 }
 
 </style>
@@ -35,23 +40,23 @@
 		맴버리스트
 	</h3>
 
-			<table border="1">
-				<col width="50"/>
+			<table border="1" class="table table-striped table-hover">
+				<col width="80"/>
 				<col width="100"/>
 				<col width="100"/>
 				<col width="100"/>
 				<col width="100"/>
 				<col width="100"/>
+				<col width="300"/>
 				<col width="100"/>
 				<col width="100"/>
 				<col width="100"/>
 				<col width="100"/>
+				<col width="180"/>
+				<col width="140"/>
 				<col width="100"/>
-				<col width="100"/>
-				<col width="100"/>
-				<col width="100"/>
-
-				<tr>
+			<thead>
+				<tr id="titletr">
 					<th>번호</th>
 					<th>아이디</th>
 					<th>이름</th>
@@ -67,10 +72,12 @@
 					<th>탈퇴여부</th>
 					<th>가입일</th>
 				</tr>
+			</thead>
+			<tbody>
 				<c:choose>
 				<c:when test="${empty member_selectlist }">
 					<tr>
-						<td colspan="14">		====================가입 된 회원정보가 없습니다====================
+						<td colspan="14" style="text-align:center;">		=======================================가입 된 회원정보가 없습니다=======================================
 					</tr>
 				</c:when>
 				<c:otherwise>
@@ -80,7 +87,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_id }									
@@ -90,7 +97,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_name }								
@@ -100,7 +107,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_nickname }							
@@ -110,7 +117,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_gender }								
@@ -120,7 +127,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_birth }								
@@ -130,7 +137,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_addr }								
@@ -140,7 +147,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_money }								
@@ -150,7 +157,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_email }								
@@ -160,7 +167,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_phone }								
@@ -170,7 +177,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_roll }								
@@ -180,7 +187,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_driveacc }								
@@ -190,7 +197,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_delflag }								
@@ -200,7 +207,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${MemberDto.member_delflag eq 'Y' }">
-										<c:out value="/////////탈퇴한 회원입니다/////////"></c:out>
+										<c:out value="// 탈퇴한 회원입니다 //"></c:out>
 									</c:when>
 									<c:otherwise>
 										${MemberDto.member_regdate }								
@@ -211,9 +218,10 @@
 					</c:forEach>
 				</c:otherwise>
 				</c:choose>
+			</tbody>
 				<tr>
 					<td colspan="14">
-						<input type="button" value="메인" onclick="location.href='doncar.do?command=member_main'"/>
+						<input type="button" class="btn btn-default pull-right" value="메인" onclick="location.href='doncar.do?command=member_main'"/>
 					</td> 
 				</tr>
 			</table>

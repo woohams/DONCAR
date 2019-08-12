@@ -13,7 +13,8 @@
 <title>RENT SELECTONE</title>
 <style type="text/css">
 #rentselectone{
-	padding-left: 100px;
+
+	padding-left: 50px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
@@ -28,7 +29,8 @@
 		<img src="image\car2.jpeg" style="width:50px; height:50px;"/>	
 		렌트카 상세보기
 	</h3>
-	<table border="1">
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>번호</th>
 			<td>${dto.rent_board_no}</td>
@@ -79,11 +81,11 @@
 			<td>${dto.rent_carname}</td>
 		</tr>
 		<tr>
-			<td>내용</td>
+			<th>내용</th>
 			<td>${dto.rent_content}</td>
 		</tr>
-	
-		
+	</thead>
+	<tbody>
 		<tr>
 			<td colspan="2">
 			<c:choose>
@@ -91,16 +93,23 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${MemberDto.member_nickname eq dto.rent_writer }">
-						<input type="button" value="수정" onclick="location.href='doncar.do?command=rentboard_update&rent_board_no=${dto.getRent_board_no()}'">
-						<input type="button" value="삭제" onclick="location.href='doncar.do?command=rentboard_delete&rent_board_no=${dto.getRent_board_no()}'">
+						<input type="button" class="btn btn-default pull-right" value="삭제" onclick="location.href='doncar.do?command=rentboard_delete&rent_board_no=${dto.getRent_board_no()}'">
+						<input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='doncar.do?command=rentboard_update&rent_board_no=${dto.getRent_board_no()}'">
+					</c:if>
+					<c:if test="${MemberDto.member_nickname ne dto.rent_writer }">
+						<input type="button" class="btn btn-default pull-right"	value="신청" onclick="location.href='rentaccinsert.jsp?seq=${dto.rent_board_no }'">
 					</c:if>
 				</c:otherwise>
 			</c:choose>
-				<input type="button" value="목록" onclick="location.href='doncar.do?command=rentboard_selectlist'">
+				<input type="button" class="btn btn-default pull-right"	value="목록" onclick="location.href='doncar.do?command=rentboard_selectlist'">
 			</td>
 		</tr>
+	</tbody>
 	</table>
-	<%@ include file="./include/comment.jsp"%>
+
+	<%@ include file="./include/comment.jsp"%>	
+	<input type="button" class="btn btn-default pull-right"	 value="승인 요청" onclick="location.href='doncar.do?command=rentacc_insert&rent_board_no=${dto.rent_board_no}'">
+																			
 </div>
 	<%@ include file="./include/footer.jsp" %>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

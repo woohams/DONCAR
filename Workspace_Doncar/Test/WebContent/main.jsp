@@ -4,7 +4,6 @@
 <% response.setContentType("text/html; charset=UTF-8"); %>    
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,9 @@
 
 <title>메인페이지</title>
 
+
 <style type="text/css">
+
 .btn{
 	background-color: skyblue;
 	color: white;
@@ -31,15 +32,48 @@
   left:0;
   min-width: 100%;
   height: 700px;
+  border:0;
+  box-shadow: 0 2px 6px 0 hsla(0,0%,0%,0.2);
 }
 .carousel {
   height: 700px;
   margin-bottom: 60px;
 }
+.container-fluid{
+	background-color:#4ea1d3;
+}
+span >.main_span {
+text-shadow:10px 2px 6px 0 hsla(0,0%,0%,0.2);
+}
 
-.jumbotron > div > img{
-padding-left: 10%;
-margin-left: 10%;
+.col-xs-12> p >.img-responsive{
+	margin-top:0px;
+	margin-left: 20%;
+	border:0;
+	box-shadow: 0 2px 6px 0 hsla(0,0%,0%,0.2);
+	position: relative;
+}
+.col-xs-12> p{
+	
+	margin-bottom: 5%;
+}
+.col-xs-12 > span{
+	margin-top:10%;
+	margin-left:2%;
+	color: white;
+	size: 20px;
+	position: absolute;
+	font-size: 20px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron > .lead{
+	text-align: left;
+	margin-left: 23%;
+
 }
 </style>
 
@@ -48,7 +82,6 @@ margin-left: 10%;
 
 	<%@ include file="./include/header.jsp" %>
 	<br><br>
-
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
@@ -76,35 +109,53 @@ margin-left: 10%;
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
-
-	<div class="container">
-  	<div class="panel panel-default">
-  		
-    	<img src="./image/main_first.jpg" alt="Third slide">
-  	</div>
+    
+    <!-- /.main -->
+	
+	<div class="container-fluid">
+		<div class="row " >
+			<div class="col-xs-12 ">
+			<span>
+				<br><font class="main_span" color="#E9EBEE"> <b><font id="rent_t" size="6px">안타는 차!</font><br> 유지비 내지만 말고 <br>돈 벌러 가자!</b></font><br>
+			</span>
+			<span><button onclick="location.href='doncar.do?command=rentboard_insert'" class="btn btn--car" style="margin-top: 140px;">차량 등록</button></span>
+				<p>
+					<img class="img-responsive" src="./image/main_first.jpg" class="img-fluid" style="left: 50px;">
+				</p>
+				
+				<span>
+					<br> <font class="main_span" color="#E9EBEE"><b><font size="6x">차가 필요할 때!</font><br><font>돈 카로 차 빌려서</font><br>여행 가자!</font></b><br>
+				</span>
+				<span><button onclick="location.href='doncar.do?command=rentboard_selectlist'" class="btn btn--rent" style="margin-top: 140px;">렌트 예약</button></span>
+				<p>
+					<img class="img-responsive" src="./image/main_second.jpg" class="img-fluid" style="left: 50px;">
+				</p>
+				
+				<span>
+					<br> <font class="main_span" color="#E9EBEE"> <b><font size="6px">이동이 필요할 때!</font><br> 쉽고 간편하게 <br>카풀하자!</b></font><br>
+				</span>
+				<span><button onclick="location.href='doncar.do?command=carboard_selectlist'" class="btn btn--carpool btn-info" style="margin-top: 140px;">카풀 에약</button></span>
+				<p>
+					<img class="img-responsive" src="./image/main_third.jpg" class="img-fluid" style="left: 50px;">
+				</p>
+			</div>
+		</div>
 	</div>
 	
-	<div class="jumbotron">
-  		<div class="panel panel-default">
-  	</div>
- 		 <img src="./image/main_first.jpg" alt="Third slide">
-		  <p>
-		  	<a class="btn btn-primary btn-info" href="doncar.do?command=rentboard_selectlist" role="button">렌트 예약</a>
-		  </p>
-	</div>
+	<!-- jumbotron -->
+	<div class="jumbotron"  style="background-color: #E9EBEE">
+        <h1>유의사항</h1>
+    	    <p class="lead"><br>
+        
+       		 - 돈카는 만 21세 이상, 면허 취득 1년 이상 시 이용 가능합니다.<br><br>
 	
-
-	<div>
-		<button onclick="location.href='doncar.do?command=rentboard_selectlist'" class="btn btn--rent">렌트 예약</button>
-	</div>
-	
-	<div>
-		<button onclick="rentmain.jsp" class="btn btn--car">차량 등록</button>
-	</div>
-	
-	<div>
-		<button onclick="carpoolmain.jsp" class="btn btn--carpool">카풀 에약</button>
-	</div>
+			 - 이용 일자 및 차종, 예약존 특성에 따라 가격에 편차가 있을 수 있습니다.<br><br>
+        
+       	     - 저희는 불법인 걸 알고도 묵인하며 프로젝트를 진행했습니다.<br><br>
+       	     
+       	     - 모든 법적인 책임은 강사님에게 있습니다.
+      	  </p>
+    </div>
 
 	<%@ include file="./include/footer.jsp" %>
 	

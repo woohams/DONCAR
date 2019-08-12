@@ -16,7 +16,7 @@
 <title>관리자 페이지</title>
 <style type="text/css">
 #adminmain{
-	padding-left: 500px;
+	padding-left: 300px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
@@ -34,8 +34,8 @@
 	</h3>
 	${MemberDto.member_nickname }님 환영합니다!<br/>
 	${MemberDto.member_nickname }님의 계정은 ${MemberDto.member_roll } 계정이시군요! <br/>
-	<input type="button" value="내정보" onclick="location.href='doncar.do?command=member_selectone&member_no=${MemberDto.member_no}'"/>
-	<input type="button" value="회원정보" onclick="location.href='doncar.do?command=member_selectlist'">
+	<input type="button" class="btn btn-default" value="내정보" onclick="location.href='doncar.do?command=member_selectone&member_no=${MemberDto.member_no}'"/>
+	<input type="button" class="btn btn-default" value="회원정보" onclick="location.href='doncar.do?command=member_selectlist'">
 	
 </div>
 <%@ include file="./include/footer.jsp" %>	

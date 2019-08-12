@@ -20,6 +20,7 @@
 		border: 1px solid black;
 	}
 	#carpoolinsert{
+	
 		padding-left: 50px;
 		padding-top: 25px;
 		padding-bottom: 50px;
@@ -56,7 +57,8 @@ $(function(){
 	</h3>
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="command" value="carboard_insert">
-	<table>
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>제목</th>
 			<td><input type="text" name="car_board_title"></td>
@@ -69,13 +71,14 @@ $(function(){
 			<th>가격</th>
 			<td>
 			
-				<input type="range" id="rent_price" name="car_board_price" min="0" step="10000" max="50000" >
+				<input type="range" id="rent_price" name="car_board_price" min="0" step="10000" max="50000" value="0";>
 				<span id="rent_price_value">0</span>원
 			</td>
 		</tr>
 		<tr>
 			<th>위치</th>
 			<td>
+				<input id="token" type="hidden" value="4ba0eebb-edbf-4145-81e4-eeff65381bd9">
 				<input id="location" type="text" name="car_board_location" value="">
 				<select id="cd_list">
 					<option>시</option>
@@ -85,24 +88,27 @@ $(function(){
 				</select>
 			</td>
 		</tr>
-				<tr>
-					<td>임시!x , y 좌표 받기 ! button만 살리고 inputtag는 hidden으로!</td>
-					<td>
-						<button type="button" onclick="popUp();">좌표설정!</button> 
-						<input type="text" id="x" name="car_board_x_point">
-						<input type="text" id="y" name="car_board_y_point">
-					</td>
-		</tr>
 		<tr>
-			<th>내용</th>
-			<td><textarea id="summernote" name="car_board_content"></textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" value="글쓰기">
-				<input type="button" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'">
+			<td>임시!x , y 좌표 받기 ! button만 살리고 inputtag는 hidden으로!</td>
+			<td>
+				<button type="button" onclick="popUp();">좌표설정!</button> 
+				<input type="text" id="x" name="car_board_x_point">
+				<input type="text" id="y" name="car_board_y_point">
 			</td>
 		</tr>
+		<tr>
+			<th style="vertical-align: middle;">내용</th>
+			<td><textarea id="summernote" name="car_board_content"></textarea></td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="2">
+				<input type="submit" class="btn btn-default pull-right" value="글쓰기">
+				<input type="button" class="btn btn-default pull-right" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'">
+			</td>
+		</tr>
+	</tbody>
 	</table>
 	</form>
 </div>

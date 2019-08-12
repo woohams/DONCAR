@@ -12,49 +12,84 @@
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <title>회원가입</title>
-
+<script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	function idChkConfirm() {
-		var chk = document.getElementsByName("member_id")[0].title;
-		if (chk == "n") {
-			alert("아이디 중복체크를 해주세요.");
-			document.getElementsByName("member_id")[0].focus();
-		}
 
-	}
 	function idChk() {
-		var doc = document.getElementsByName("member_id")[0];
-		if (doc.value.trim() == "" || doc.value == null) {
-			alert("아이디를 입력해 주세요!");
-		} else {
-			open("doncar.do?command=member_idchk&id=" + doc.value, "",
-					"width=200, height=200");
+	var id = $("#id").val();
+	var chk = $("#id_check");
+	if(id==null || id==""){
+		chk.prop('title','n');
+		chk.html('부적합한 아이디입니다');
+		chk.css('color','red');
+		return;
+	}else{
+		var command = 'command=member_idchk'
+		id = "&id="+id;
+		$.ajax({
+			url : "doncar.do",
+			data : command+id,
+			dataType : "json",
+			success : function(obj){
+				if(obj.res == true){
+					chk.prop('title','y');
+					chk.html('중복체크완료');
+					chk.css('color','black');
+				}else{
+					chk.prop('title','n');
+					chk.html('부적합한 아이디입니다');
+					chk.css('color','red');
+				}
+			},error : function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	}
+	}
+	
+	function nickChk(){
+		var id = $("#nick").val();
+		var chk = $("#nick_check");
+		if(id==null || id==""){
+			chk.prop('title','n');
+			chk.html('부적합한 닉네임입니다');
+			chk.css('color','red');
+			return;
+		}else{
+			var command = 'command=member_nicknamechk'
+			id = "&nick="+id;
+			$.ajax({
+				url : "doncar.do",
+				data : command+id,
+				dataType : "json",
+				success : function(obj){
+					if(obj.res == true){
+						chk.prop('title','y');
+						chk.html('중복체크완료');
+						chk.css('color','black');
+					}else{
+						chk.prop('title','n');
+						chk.html('부적합한 닉네임입니다');
+						chk.css('color','red');
+					}
+				},error : function(request,status,error){
+			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			})
 		}
 	}
 
-	function nicknameChkConfirm() {
-		var chk = document.getElementsByName("member_nickname")[0].title;
-		if (chk == "n") {
-			alert("닉네임 중복체크를 해주세요.");
-			document.getElementsByName("member_nickname")[0].focus();
-		}
 
-	}
-	function nicknameChk() {
-		var doc = document.getElementsByName("member_nickname")[0];
-		if (doc.value.trim() == "" || doc.value == null) {
-			alert("닉네임을 입력해 주세요!");
-		} else {
-			open("doncar.do?command=member_nicknamechk&nickname=" + doc.value,
-					"", "width=200, height=200");
-		}
-	}
 
 	function pwChk() {
 		var pw = document.getElementById("member_pw").value;
 		var pwCk = document.getElementById("pwCk").value;
-		var id = document.getElementById("member_id").value;
-
+		$('#pwChk').css('color','red');
+		if(pw != pwCk){
+			$("#pwChk").html('입력하신 비밀번호가 서로 다릅니다')
+			return;
+		}
+		
 		pw_passed = true;
 
 		var pattern1 = /[0-9]/;
@@ -62,36 +97,25 @@
 		var pattern3 = /[~!@\#$%<>^&*]/; 	// 특수문자 제거
 		var pw_msg = "입력하신 패스워드 사용이 가능합니다.";
 
-		if (id.length == 0) {
-			alert("아이디를 입력해주세요");
-			return false;
-
-		} else {
-
-			// id 조건
-		}
-
 		if (pw.length == 0) {
-			alert("비밀번호를 입력해주세요");
+			$('#pwChk').html("비밀번호를 입력해주세요");
+
 			return false;
 
 		} else {
 			if (pw != pwCk) {
-				alert("비밀번호가 일치하지 않습니다.");
-				return false;
+				$('#pwChk').html("비밀번호가 일치하지 않습니다.");
+				return;
 			}
 		}
 
 		if (!pattern1.test(pw) || !pattern2.test(pw) || !pattern3.test(pw)
 				|| pw.length<8||pw.length>50) {
-			alert("영문+숫자+특수기호 8자리 이상으로 구성하여야 합니다.");
-			return false;
+			$('#pwChk').html("영문+숫자+특수기호 8자리 이상으로 구성하여야 합니다.");
+			return ;
 		}
 
-		if (pw.indexOf(id) > -1) {
-			alert("비밀번호는 ID를 포함할 수 없습니다.");
-			return false;
-		}
+
 
 		var SamePass_0 = 0;
 		var SamePass_1 = 0; 
@@ -133,33 +157,43 @@
 			}
 
 			if (SamePass_0 > 0) {
-				alert("동일문자를 3자 이상 연속 입력할 수 없습니다.");
-				pw_passed = false;
+				$('#pwChk').html("동일문자를 3자 이상 연속 입력할 수 없습니다.");
+				return;
 			}
 
 			if (SamePass_1 > 0 || SamePass_2 > 0) {
-				alert("영문, 숫자는 3자 이상 연속 입력할 수 없습니다.");
-				pw_passed = false;
+				$('#pwChk').html("영문, 숫자는 3자 이상 연속 입력할 수 없습니다.");
+				return;
 			}
 
-			if (!pw_passed) {
-				return false;
-				break;
-			}
-				alert(pw_msg);
-				break;
+			$('#pwChk').html(pw_msg);
+			$('#pwChk').css('color','black');
+			$('#pwChk').prop('title','y');
+			return;
 				
 			
 		}
-		return true;	
 		
+	}
+	
+	function check(){
+		setTimeout(function() {
+			var chk = $('* [title=n]').size();
+			if(chk==0){
+				return true;
+			}
+			alert('유효성검사에 실패했습니다 다시확인해주세요');
+			
+			return false;
+			}, 2000);
+
 	}
 
 </script>
 <style type="text/css">
 #regist{
 	padding-top: 30px;
-	padding-left: 500px;
+	padding-left: 150px;
 	padding-bottom: 30px;
 }
 h3 > img{
@@ -176,22 +210,23 @@ h3 > img{
 		회 원 가 입
 	</h3>
 
-	<form action="doncar.do" method="post">
+	<form action="doncar.do" method="post" onsubmit="return check()">
 		<input type="hidden" name="command" value="member_regist" />
 
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>아이디</th>
 				<td>	
-					<input type="text" name="member_id" id="member_id"required="required" title="n" />
-					<input type="button" value="중복 체크" onclick="idChk();" />
+					<input type="text" name="member_id"  id="id" onchange="idChk();" required="required" />
+					<span id="id_check"  title="n" style="color:red; font-size: 3px;">부적합한 아이디입니다</span>
 				</td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
 				<td>
-					<input type="text" name="member_nickname" required="required" title="n" /> 
-					<input type="button" value="중복 체크" onclick="nicknameChk();idChkConfirm();" />
+					<input type="text" name="member_nickname" id="nick" onchange="nickChk();" required="required"  /> 
+					<span id="nick_check" title="n" style="color:red; font-size: 3px;">부적합한 닉네임입니다</span>
 				</td>
 			</tr>
 
@@ -204,14 +239,14 @@ h3 > img{
 			<tr>
 				<th>비밀번호</th>
 				<td>
-					<input type="password" name="member_pw" id="member_pw" required="required" onclick="idChkConfirm();nicknameChkConfirm();" />
+					<input type="password" name="member_pw" id="member_pw" required="required" onchange="pwChk();"/>
 				</td>
 			</tr>
 			<tr>
 				<th>비밀번호 확인</th>
 				<td>
-					<input type="password" id="pwCk" required="required" onclick="idChkConfirm();nicknameChkConfirm();" /> 
-					<input type="button" value="비밀번호 확인" onclick="pwChk();" />
+					<input type="password" id="pwCk" required="required" onchange="pwChk();" />
+					<span id="pwChk" style="color:red; font-size: 3px;" title="n"></span>
 				</td>
 			</tr>
 			<tr>
@@ -220,14 +255,16 @@ h3 > img{
 					<input type="email" onclick="" placeholder="마이페이지에서 인증"/>
 				</td>
 			</tr>
+			</thead>
+			<tbody>
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="가입" /> 
-					<input type="button" value="취소" onclick="location.href='index.jsp'" /> 
-					<input type="reset" value="초기화" />
+					<input type="reset" class="btn btn-default pull-right" value="초기화" />
+					<input type="button" class="btn btn-default pull-right" value="취소" onclick="location.href='index.jsp'" /> 
+					<input type="submit" class="btn btn-default pull-right" value="가입" /> 
 				</td>
 			</tr>
-
+			</tbody>
 		</table>
 
 	</form>

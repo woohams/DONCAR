@@ -14,22 +14,24 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <%@ include file="./js/summernote.html" %>
 <title>RENTACC SELECTONE</title>
-<%
-	RentAccDto dto = (RentAccDto) request.getAttribute("dto");
-%>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
 	<h1>RentAccSelectOne Page</h1>
-	<form action="doncar.do" method="post">
-	<table border="1">
+	<form action="doncar.do" method="post">	
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>승인번호</th>
 			<td>${dto.rentacc_no}</td>
 		</tr>
 		<tr>
 			<th>렌트게시판번호</th>
-			<td>${dto.rentacc_board_no}</td>
+			<td>${dto.rent_board_no}</td>
+		</tr>
+		<tr>
+			<th>진행도</th>
+			<td>${dto.rentacc_process }</td>
 		</tr>
 		<tr>
 			<th>시작날짜</th>
@@ -40,28 +42,21 @@
 			<td>${dto.rentacc_end_date}</td>
 		</tr>
 		<tr>
-			<th>승인</th>
-			<td>${dto.rentacc_acc}</td>
-		</tr>
-		<tr>
-			<th>삭제상태</th>
-			<td>${dto.rentacc_delflag}</td>
-		</tr>
-		<tr>
 			<th>닉네임</th>
 			<td>${dto.rentacc_nickname}</td>
 		</tr>
 		<tr>
 			<th>남기는말</th>
-			<td><textarea rows="10" cols="60" readonly="readonly">${dto.rentacc_comment}</textarea></td>
+			<td>${dto.rentacc_comment}</td>
 		</tr>
+		<tbody>
 		<tr>
 			<td colspan="2">
-				<input type="button" value="수정" onclick="location.href='doncar.do?command=rentacc_update&rentacc_no=${dto.rentacc_no}'">
-				<input type="button" value="삭제" onclick="location.href='doncar.do?command=rentacc_delete&rentacc_no=${dto.rentacc_no}'">
-				<input type="button" value="목록" onclick="location.href='doncar.do?command=rentacc_selectlist'">
+				<input type="button" class="btn btn-default pull-right"	value="삭제" onclick="location.href='doncar.do?command=rentacc_delete&rentacc_no=${dto.rentacc_no}'">
+				<input type="button" class="btn btn-default pull-right"	value="메인" onclick="location.href='main.jsp'">
 			</td>
 		</tr>
+		</tbody>
 	</table>	
 	</form>
 <%@ include file="./include/footer.jsp" %>	

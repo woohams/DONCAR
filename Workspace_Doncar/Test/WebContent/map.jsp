@@ -63,7 +63,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c0a0d22b781ecb062840d3c4133c7220&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b731013681fcc6d66dd529c2df1358b&libraries=services"></script>
 <script type="text/javascript" src="./js/jquery-3.4.1.min.js"></script>
 <script>
 // 마커를 담을 배열입니다

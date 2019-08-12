@@ -23,7 +23,7 @@
 	}
 	
 	#carpoolupdate{
-		padding-left: 430px;
+		padding-left: 50px;
 		padding-top: 25px;
 		padding-bottom: 50px;
 	}
@@ -60,7 +60,8 @@ $(function(){
 	<form action="doncar.do" method="get">
 	<input type="hidden" name="command" value="carboard_updateres">
 	<input type="hidden" name="car_board_no" value="${dto.car_board_no }">
-	<table>
+	<table border="1" class="table table-striped table-hover">
+	<thead>
 		<tr>
 			<th>제목</th>
 			<td><input type="text" name="car_board_title" value="${dto.car_board_title }"></td>
@@ -95,15 +96,20 @@ $(function(){
 						<input type="text" id="x" name="car_board_x_point" value="${dto.car_board_x_point }">
 						<input type="text" id="y" name="car_board_y_point" value="${dto.car_board_y_point }">
 					</td>
-				</tr>
+		</tr>
 		<tr>
 			<th>내용</th>
 			<td><textarea id="summernote" name="car_board_content">${dto.car_board_content }</textarea></td>
 		</tr>
+		</thead>
+		<tbody>
 		<tr>
-			<td><input type="submit" value="수정"></td>
-			<td><input type="button" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'"></td>
+			<td colspan="8">
+				<input class="btn btn-default pull-right" type="submit" value="수정">
+				<input class="btn btn-default pull-right" type="button" value="목록" onclick="location.href='doncar.do?command=carboard_selectlist'">
+			</td>
 		</tr>
+		</tbody>
 	</table>
 	</form>
 </div>

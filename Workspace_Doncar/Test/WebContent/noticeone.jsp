@@ -11,14 +11,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 <title>공지사항 자세히보기</title>
+<style type="text/css">
+thead > tr> th{
+	weight: 100px;
+}
+
+</style>
 </head>
 <body>
 <%@ include file="./include/header.jsp" %>
+	<h3>
+		<img src="image\notice3.jpg" style="width:50px; height:50px;"/>	
+		공지사항 자세히보기
+	</h3>
 	<form action="doncar.do" method="post">
 	<input type="hidden" name="comman" value="update"/>
 	<input type="hidden" name="notice_no" value="${dto.notice_no }"/>
-		<table border="1">
+		<table border="1" class="table table-striped table-hover">
+		<thead>
 			<tr>
 				<th>작성자</th>
 				<td>${dto.notice_writer }</td>
@@ -31,13 +43,16 @@
 				<th>내   용</th>
 				<td>${dto.notice_content }</td>
 			</tr>
+		</thead>
+			<tbody>
 			<tr>
 				<td colspan="2">
-					<input type="button" value="수정" onclick="location.href='doncar.do?command=noticeboard_update&notice_no=${dto.notice_no}'"/>
-					<input type="button" value="삭제" onclick="location.href='doncar.do?command=noticeboard_delete&notice_no=${dto.notice_no}'"/>
-					<input type="button" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
+					<input type="button" class="btn btn-default pull-right" value="수정" onclick="location.href='doncar.do?command=noticeboard_update&notice_no=${dto.notice_no}'"/>
+					<input type="button" class="btn btn-default pull-right" value="삭제" onclick="location.href='doncar.do?command=noticeboard_delete&notice_no=${dto.notice_no}'"/>
+					<input type="button" class="btn btn-default pull-right" value="목록" onclick="location.href='doncar.do?command=noticeboard_selectlist'"/>
 				</td>
 			</tr>
+			</tbody>
 		</table>
 	</form>
 

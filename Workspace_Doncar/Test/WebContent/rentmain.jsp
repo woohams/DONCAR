@@ -16,7 +16,7 @@
 <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #rentmain{
-	padding-left: 500px;
+	padding-left: 150px;
 	padding-top: 25px;
 	padding-bottom: 50px;
 }
