@@ -1,11 +1,13 @@
 package com.doncar.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.doncar.dto.FreeBoardDto;
 import com.doncar.dto.MemberDto;
 
 public class MemberDao extends SqlMapConfig {
@@ -32,6 +34,129 @@ public class MemberDao extends SqlMapConfig {
 
 		return dto;
 
+	}
+	
+
+	
+	public String idChk(String id) {
+		
+		SqlSession session = null;
+		String res = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.selectOne(namespace + "idChk", id);
+			
+			if(res != null) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+			
+		return res;
+	
+	}
+	
+	public String nicknameChk(String nickname) {
+		
+		SqlSession session = null;
+		System.out.println(nickname);
+		String res = null;
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.selectOne(namespace + "nicknameChk", nickname);
+			
+			if(res != null) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+			
+		return res;
+	
+	}
+	
+	public MemberDto findId(String member_name, String member_phone, String member_birth) {
+
+		SqlSession session = null;
+		MemberDto MemberDto = null;
+
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			MemberDto = session.selectOne(namespace + "findId", MemberDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return MemberDto;
+	}
+	
+	public MemberDto findPw(String member_id, String member_phone) {
+		
+		SqlSession session = null;
+		MemberDto MemberDto = null;
+
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			MemberDto = session.selectOne(namespace + "findPw", MemberDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+
+		return MemberDto;
+		
+	}
+	
+	public List<FreeBoardDto> selectWrite(FreeBoardDto FreeBoardDto) {
+		
+		SqlSession session = null;
+		List<FreeBoardDto> list = new ArrayList<FreeBoardDto>();
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			list = session.selectList(namespace + "selectWrite", FreeBoardDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
+	
+	public int pwUpdate(MemberDto MemberDto) {
+
+		SqlSession session = null;
+		int res = 0;
+		
+		try {
+			session = getSqlSessionFactory().openSession(false);
+			res = session.update(namespace + "pwUpdate", MemberDto);
+			
+			if(res > 0) {
+				session.commit();
+			}
+			
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {
+			session.close();			
+		}
+		
+		return res;
+		
 	}
 
 	public List<MemberDto> selectList() {
@@ -133,6 +258,16 @@ public class MemberDao extends SqlMapConfig {
 		}
 
 		return res;
+	}
+
+	public MemberDto snsLogin(String id) {
+		SqlSession session = null;
+		MemberDto dto = null;
+		
+		session = getSqlSessionFactory().openSession(false);
+		dto = session.selectOne(namespace+"snslogin",id);
+		
+		return dto;
 	}
 
 }
